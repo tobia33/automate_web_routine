@@ -1,0 +1,59 @@
+class SiteManager
+   
+    attributes:
+        - current_url
+        - driver
+
+    methods:
+        - goto
+        - back
+        - forward
+        - reload
+        - minimize
+        - maximize
+
+
+class YoutubeSong
+
+
+class YoutubeManager(SiteManager)
+    
+    attributes:
+        - base_url
+        - current_song
+        - next_song
+    methods:
+        - goto_previous_song(back)
+        - goto_next_song
+        - show_next_song
+        - show_current_song
+        - stop
+        - play
+        - silence
+
+class YoutubeShuffle(YoutubeManager)
+    
+    attributes:
+        - found
+        - recommended
+    methods:
+        - search
+        - show_recommended
+        - pick recommended
+        - shuffle
+        - show_found
+        - pick_found
+
+class YoutubeDisk(YoutubeManager)
+    attributes:
+        - disk_queue
+        - current_artist
+        - current_disk
+    methods:
+        - show_artits
+        - show_disks
+        - show_all
+        - pick
+        - shuffle
+        - show_current_disk
+        
