@@ -37,9 +37,11 @@ print("="*70 + "\n")
 
 while True:
     print("-"*70)
-    command = input("\nwhat can I do?\n>")
-    if command == "quit" or command == "q":
-        manager.driver.close()
+    command = input("\nwhat can I do?\n\n>")
+    if not command:
+        continue
+    elif command == "quit" or command == "q":
+        manager.quit()
         break
     try:
         info = execute_command(manager, command)

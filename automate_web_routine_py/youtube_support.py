@@ -8,17 +8,31 @@ def execute_command(manager, command):
     manager: YoutubeShuffle
     if command == "h" or command == "help" or command == "quick help" or command == "qh":
         return execute_help_command(command)
-    opcode, *addressing_mode = command.split()
+    opcode, *addressing_mode = command.split(maxsplit=1)
     if opcode == "s" or opcode == "search":
         if not addressing_mode:
             addressing_mode = input("what would you want to search?\n>")
         manager.search(addressing_mode)
         print(manager.string_found() + "\n")
-        manager.pick_found(input("pick the song you want to listen to\n>"))
+        pick = input("pick the song you want to listen to\n>")
+        if pick[:2] == "s ":
+            return execute_command(manager, pick)
+        while pick == "go":
+            # execute the 'go' command
+            manager.go()
+            pick = input("pick the song you want to listen to\n>")
+        manager.pick_found(pick)
     elif opcode == "r" or opcode == "recommended":
         manager.find_recommended()
         print(manager.string_recommended() + "\n")
-        manager.pick_recommended(input("pick the song you want to listen to\n>"))
+        pick = input("pick the song you want to listen to\n>")
+        if pick[:2] == "s ":
+            return execute_command(manager, pick)
+        while pick == "go":
+            # execute the 'go' command
+            manager.go()
+            pick = input("pick the song you want to listen to\n>")
+        manager.pick_recommended(pick)
     elif opcode == "p" or opcode == "pause" or opcode == "play":
         manager.play_pause()
     elif opcode == "m" or opcode == "mute":
@@ -27,7 +41,7 @@ def execute_command(manager, command):
         manager.back()
     elif opcode == "f" or opcode == "forward":
         manager.forward()
-    elif opcode == "refresh":
+    elif opcode == "refresh" or opcode == "ref":
         manager.refresh()
     elif opcode == "n" or opcode == "next":
         manager.find_next_song()
@@ -35,12 +49,12 @@ def execute_command(manager, command):
         go = input("do you want to go next? [y/n]\n>")
         if go == "y":
             manager.goto_next_song()
+    elif opcode == "current" or opcode == "cs":
+        print(manager.string_current_song())
     elif opcode == "clear" or opcode == "c":
         os.system("clear")
     elif opcode == "go":
-        os.system("xdotool set_desktop --relative 1")
-        os.system("xdotool key alt+ctrl+t")
-        os.system("xdotool key alt+ctrl+t")
+        manager.go()
 
 
 

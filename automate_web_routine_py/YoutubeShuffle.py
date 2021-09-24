@@ -20,6 +20,7 @@ class YoutubeShuffle(YoutubeManager):
 
     def find_recommended(self):
         """ find the recommended songs """
+        self.recommended = []
         if self.current_url == self.base_url:
             raw_recommended = self.driver.find_elements_by_css_selector("ytd-rich-item-renderer")
         else:
@@ -33,8 +34,18 @@ class YoutubeShuffle(YoutubeManager):
     def search(self, string):
         """ search for the string in the search bar
             and put what is found in the found attribute"""
+        self.found = []
+        self.driver.get(self.base_url)
         search_bar = self.driver.find_element_by_css_selector("input#search")
-        search_bar.send_keys(string)
+        send = ""
+        for c in string:
+            if c == " ":
+                search_bar.send_keys(send)
+                search_bar.send_keys(Keys.SPACE)
+                send = ""
+            else:
+                send += c
+        search_bar.send_keys(send)
         button = self.driver.find_element_by_css_selector("button#search-icon-legacy")
         button.click()
         self.current_url = self.driver.current_url
@@ -51,7 +62,7 @@ class YoutubeShuffle(YoutubeManager):
         """ used for string_recommended and string_found """
         to_show = ""
         for song in reversed(iterable):
-            to_show += "\n\t-" + song.title + "\n"
+            to_show += "\n" + self.string_song(song)
         return to_show
 
     def string_recommended(self):

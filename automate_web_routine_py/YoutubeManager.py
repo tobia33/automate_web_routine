@@ -2,7 +2,7 @@ from SiteManager import SiteManager
 from YoutubeSong import YoutubeSong
 from selenium.webdriver import Firefox
 from time import sleep
-
+import os
 
 
 class YoutubeManager(SiteManager):
@@ -33,7 +33,13 @@ class YoutubeManager(SiteManager):
         self.next_song = YoutubeSong(title.strip(), url)
 
     def string_next_song(self):
-        return "\t-" + self.next_song.title
+        return self.string_song(self.next_song)
+
+    def string_current_song(self):
+        return self.string_song(self.current_song)
+
+    def string_song(self, song):
+        return "\t-" + song.title
 
     def goto_next_song(self):
         """ go to the next song """
@@ -42,6 +48,13 @@ class YoutubeManager(SiteManager):
         self.next_song = None
         self.goto()
         self.play_pause()
+
+    def go(self):
+        """ go to the other workspace and look at the youtube page
+            or come back"""
+        os.system("xdotool set_desktop --relative 1")
+        os.system("xdotool key alt+ctrl+t")
+        os.system("xdotool key alt+ctrl+t")
 
     def play_pause(self):
         """ pause or resume the video """
@@ -58,14 +71,18 @@ class YoutubeManager(SiteManager):
             is forced, (e.g. back, forward)"""
         self.current_song = YoutubeSong(self.driver.title, self.current_url)
 
+    def quit(self):
+        home_dir = os.listdir("/home/tobia")
+        if "geckodriver.log" in home_dir:
+            os.system("rm /home/tobia/geckodriver.log")
+        self.driver.close()
+
     def back(self):
         super().back()
-        self.play_pause()
         self.get_current_song()
 
     def forward(self):
         super().forward()
-        self.play_pause()
         self.get_current_song()
 
     @property
