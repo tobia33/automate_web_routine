@@ -6,6 +6,9 @@ from time import sleep
 from random import randint
 from youtube_exceptions import *
 from selenium.webdriver.common.keys import Keys
+from selenium.webdriver.support.wait import WebDriverWait
+from selenium.webdriver.support.expected_conditions import element_to_be_clickable
+from selenium.webdriver.common.by import By
 
 
 class YoutubeShuffle(YoutubeManager):
@@ -46,12 +49,13 @@ class YoutubeShuffle(YoutubeManager):
             else:
                 send += c
         search_bar.send_keys(send)
-        button = self.driver.find_element_by_css_selector("button#search-icon-legacy")
+        wait = WebDriverWait(self.driver, 2)
+        button = wait.until(element_to_be_clickable((By.CSS_SELECTOR, "button#search-icon-legacy")))
         button.click()
         self.current_url = self.driver.current_url
         self.current_song = None
         self.next_song = None
-        sleep(1)
+        sleep(0.5)
         raw_songs = self.driver.find_elements_by_css_selector("ytd-video-renderer")
         for raw_song in raw_songs:
             title = raw_song.find_element_by_id("video-title").get_attribute("textContent")

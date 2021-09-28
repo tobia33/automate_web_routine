@@ -10,12 +10,12 @@ class SiteManager:
     def __init__(self, current_url, driver):
         """ constructor for SiteManager """
         self.__current_url = current_url
+        driver.implicitly_wait(3)
         self.__driver = driver
 
     def goto(self):
         """ go to the current_url """
         self.driver.get(self.current_url)
-        sleep(1)
 
     def back(self):
         """ click the back button"""

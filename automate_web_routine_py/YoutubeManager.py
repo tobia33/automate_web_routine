@@ -3,7 +3,9 @@ from YoutubeSong import YoutubeSong
 from selenium.webdriver import Firefox
 from time import sleep
 import os
-
+from selenium.webdriver.support.wait import WebDriverWait
+from selenium.webdriver.support.expected_conditions import element_to_be_clickable
+from selenium.webdriver.common.by import By
 
 class YoutubeManager(SiteManager):
     """ YoutubeManager manages the youtube website
@@ -21,8 +23,8 @@ class YoutubeManager(SiteManager):
 
     def get_rid_of_cookies(self):
         """ get rid of the cookies when you start youtube """
-        sleep(1)
         button = self.driver.find_elements_by_css_selector("ytd-button-renderer.style-scope.ytd-consent-bump-v2-lightbox.style-primary.size-default")[1]
+        sleep(1)
         button.click()
 
     def find_next_song(self):
@@ -47,6 +49,7 @@ class YoutubeManager(SiteManager):
         self.current_url = self.next_song.url
         self.next_song = None
         self.goto()
+        sleep(0.5)
         self.play_pause()
 
     def go(self):
