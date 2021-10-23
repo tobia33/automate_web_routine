@@ -55,7 +55,7 @@ class YoutubeShuffle(YoutubeManager):
         self.current_url = self.driver.current_url
         self.current_song = None
         self.next_song = None
-        sleep(0.5)
+        sleep(1)
         raw_songs = self.driver.find_elements_by_css_selector("ytd-video-renderer")
         for raw_song in raw_songs:
             title = raw_song.find_element_by_id("video-title").get_attribute("textContent")

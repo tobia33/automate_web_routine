@@ -4,7 +4,7 @@ from YoutubeManager import YoutubeManager
 from YoutubeSong import YoutubeSong
 from YoutubeShuffle import YoutubeShuffle
 from selenium.webdriver import Firefox
-from selenium.webdriver.common.keys import Keys
+from selenium.webdriver.firefox.options import FirefoxProfile
 from time import sleep
 from youtube_support import execute_command
 from youtube_exceptions import *
@@ -20,16 +20,15 @@ welcome_string = "\n\t" + wrapping_lines*3 + "#"*how_many_sx + "-----" +\
     partial_welcome_string + "-----" + "#"*how_many_dx + "\n\t" + wrapping_lines*3
 print(welcome_string)
 
-manager = YoutubeShuffle(Firefox(executable_path="/home/tobia/projects/useful_stuff/geckodriver"))
+myprofile = FirefoxProfile("/home/tobia/.mozilla/firefox/iz1qwvqy.default-release")
+manager = YoutubeShuffle(Firefox(executable_path="/home/tobia/projects/useful_stuff/geckodriver", firefox_profile=myprofile))
+
 manager.goto()
 
-os.system("xdotool key alt+ctrl+shift+Right")
-os.system("xdotool set_desktop --relative 1")
-
 os.system("xdotool key alt+ctrl+t")
 os.system("xdotool key alt+ctrl+t")
 
-manager.get_rid_of_cookies()
+#manager.get_rid_of_cookies()
 print("="*70)
 print(">write help (or h) to get  the list of all commands and an explanation\n")
 print(">write quick help (or qh) for a compact list of most used commands")

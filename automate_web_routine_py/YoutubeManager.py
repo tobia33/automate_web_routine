@@ -49,7 +49,7 @@ class YoutubeManager(SiteManager):
         self.current_url = self.next_song.url
         self.next_song = None
         self.goto()
-        sleep(0.5)
+        #sleep(0.5)
         self.play_pause()
 
     def go(self):
