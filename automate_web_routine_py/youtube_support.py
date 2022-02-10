@@ -6,6 +6,8 @@ from YoutubeShuffle import YoutubeShuffle
 def execute_command(manager, command):
     """ execute the command """
     manager: YoutubeShuffle
+    if command == "ad":
+        manager.ad_killer()
     if command == "h" or command == "help" or command == "quick help" or command == "qh":
         return execute_help_command(command)
     opcode, *addressing_mode = command.split(maxsplit=1)
@@ -41,7 +43,7 @@ def execute_command(manager, command):
         manager.back()
     elif opcode == "f" or opcode == "forward":
         manager.forward()
-    elif opcode == "refresh" or opcode == "ref":
+    elif opcode == "refresh" or opcode == "re" or opcode == "reload":
         manager.refresh()
     elif opcode == "n" or opcode == "next":
         manager.find_next_song()

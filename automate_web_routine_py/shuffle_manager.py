@@ -1,15 +1,11 @@
 import os
-from SiteManager import SiteManager
-from YoutubeManager import YoutubeManager
-from YoutubeSong import YoutubeSong
 from YoutubeShuffle import YoutubeShuffle
 from selenium.webdriver import Firefox
 from selenium.webdriver.firefox.options import FirefoxProfile
-from time import sleep
+from selenium.webdriver.firefox.options import Options
+
 from youtube_support import execute_command
 from youtube_exceptions import *
-import sys
-
 os.system("clear")
 partial_welcome_string = "Welcome to Shuffle Manager!"
 wrapping_lines = "#"*50 + "\n\t"
@@ -20,19 +16,29 @@ welcome_string = "\n\t" + wrapping_lines*3 + "#"*how_many_sx + "-----" +\
     partial_welcome_string + "-----" + "#"*how_many_dx + "\n\t" + wrapping_lines*3
 print(welcome_string)
 
-myprofile = FirefoxProfile("/home/tobia/.mozilla/firefox/iz1qwvqy.default-release")
-manager = YoutubeShuffle(Firefox(executable_path="/home/tobia/projects/useful_stuff/geckodriver", firefox_profile=myprofile))
+options = Options()
+if input("do you want the manual version?") == "y":
+    manual = True
+else:
+    options.headless = True
+    manual = False
+#myprofile = FirefoxProfile("/home/tobia/.mozilla/firefox/iz1qwvqy.default-release")
+#manager = YoutubeShuffle(Firefox(executable_path="/home/tobia/projects/useful_stuff/geckodriver", firefox_profile=myprofile, options=options))
 
+manager = YoutubeShuffle(Firefox(executable_path="/home/tobia/projects/useful_stuff/geckodriver", options=options))
 manager.goto()
 
-os.system("xdotool key alt+ctrl+t")
-os.system("xdotool key alt+ctrl+t")
-
-#manager.get_rid_of_cookies()
+manager.get_rid_of_cookies()
 print("="*70)
 print(">write help (or h) to get  the list of all commands and an explanation\n")
 print(">write quick help (or qh) for a compact list of most used commands")
 print("="*70 + "\n")
+if manual:
+    inp = input("choose one genre r or j")
+    if inp == "j":
+        manager.driver.get("https://www.youtube.com/user/BnFJazzBlues")
+    else:
+        manager.driver.get("https://www.youtube.com/c/ClassicRock26")
 
 while True:
     print("-"*70)

@@ -1,0 +1,59 @@
+{
+    "jazz": {
+                    "billie holiday" : [
+                                [True, "cjs 44", ""https://www.youtube.com/watch?v=8OA6Q-T-JN4&list=PLuxFiYJhGFzu-CXjTP7m66rSFrvT6b5N4"],
+                                [True, "cjs 54-55", "https://www.youtube.com/watch?v=wpEohRanSsw&list=PLuxFiYJhGFzvkljQ6yzTzWE2X2P94tLFO"],
+                                [True, "cjs 55", "https://www.youtube.com/watch?v=VujfAAPBJPU&list=PLuxFiYJhGFzsOHqRwclw7LQXNhwFSGB1m"],
+                                [True, "cjs 56", "https://www.youtube.com/watch?v=XQTBzsyBM4Q&list=PLuxFiYJhGFzunXA1_QEAKZPM5OsZe4R67"],
+                    ],
+
+                    "miles davis" : [
+                                [True, "the musings of miles", "https://www.youtube.com/watch?v=Z_pZeTwDB2Q&list=OLAK5uy_kZWYNodPy_sX6iYcApvAtVRkoVd7YCN1U"],
+                                [True, "blue moods", "https://www.youtube.com/watch?v=-lSJ5GtLB50"],
+                    ],
+
+                    "john coltrane" : [
+                                ["", ""],
+                                ["", ""],
+                    ],
+
+                    "luis armstrong" : [
+                                ["", ""],
+                                ["", ""],
+                    ],
+
+                    "charles mingus" : [
+                                ["", ""],
+                                ["", ""],
+                    ],
+
+                    "theloniuos monk" : [
+                                ["", ""],
+                                ["", ""],
+                    ],
+
+                    "ella fitzgerald" : [
+                                ["", ""],
+                                ["", ""],
+                    ],
+
+                    "charlie parker" : [
+                                ["", ""],
+                                ["", ""],
+                    ],
+
+                    "duke ellington" : [
+                                ["", ""],
+                                ["", ""],
+                    ],
+
+                    "chet baker" : [
+                                ["", ""],
+                                ["", ""],
+                    ],
+
+                    "ornette coleman" : [
+                                ["", ""],
+                                ["", ""],
+                    ],
+                }

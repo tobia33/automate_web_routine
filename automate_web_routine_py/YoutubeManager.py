@@ -1,8 +1,8 @@
 from SiteManager import SiteManager
 from YoutubeSong import YoutubeSong
-from selenium.webdriver import Firefox
-from time import sleep
+from selenium.common.exceptions import TimeoutException
 import os
+from time import sleep
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support.expected_conditions import element_to_be_clickable
 from selenium.webdriver.common.by import By
@@ -24,7 +24,7 @@ class YoutubeManager(SiteManager):
     def get_rid_of_cookies(self):
         """ get rid of the cookies when you start youtube """
         button = self.driver.find_elements_by_css_selector("ytd-button-renderer.style-scope.ytd-consent-bump-v2-lightbox.style-primary.size-default")[1]
-        sleep(1)
+        #sleep(0.3)
         button.click()
 
     def find_next_song(self):
@@ -42,6 +42,23 @@ class YoutubeManager(SiteManager):
 
     def string_song(self, song):
         return "\t-" + song.title
+
+    def ad_checker(self):
+        try:
+            self.driver.find_element_by_class_name("ytp-ad-preview-container")
+            return True
+        except Exception as e:
+            e.with_traceback()
+            return False
+
+    def ad_killer(self):
+        wait = WebDriverWait(self.driver, 5)
+        try:
+            wait.until(element_to_be_clickable((By.CLASS_NAME, "ytp-ad-skip-button")))
+        except TimeoutException:
+            return False
+        self.driver.find_element_by_class_name("ytp-ad-skip-button").click()
+        return True
 
     def goto_next_song(self):
         """ go to the next song """

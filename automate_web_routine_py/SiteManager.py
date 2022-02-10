@@ -1,5 +1,4 @@
 from selenium.webdriver import Firefox
-from time import sleep
 
 class SiteManager:
     """ SiteManager manages a website
